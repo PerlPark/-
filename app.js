@@ -1,6 +1,8 @@
 const express = require('express');
 const pug = require('pug');
 let app = express();
+/* body parser */
+app.use(express.json());
 /* 정적 폴더 경로 등록 */
 app.use(express.static('public'));
 /* 템플릿 폴더 경로 등록 & 엔진 사용 */
