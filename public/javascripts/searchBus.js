@@ -1,15 +1,17 @@
-document.querySelector('input').onkeyup = function(){
-  console.log('키보드 눌림');
-  sendBusInputData(this);
+let busInput = document.querySelector('input');
+
+busInput.onkeyup = function(){
+  realTimeBusSearch(this);
 };
+let realTimeBusSearch = function(eventTaget){
+  console.log(eventTaget.value);
+}
 
-let sendBusInputData = function(eventTaget){
+document.querySelector('button').onclick = searchBus;
+let searchBus = function(){
   /* XML Request */
-  let data = {'routeNo' : eventTaget.value};
-  data = JSON.stringify(data);
-
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', '/');
+  xhr.open('GET', '/search');
   xhr.setRequestHeader('Content-type', "application/json");
-  xhr.send(data);
+  xhr.send();
 }
