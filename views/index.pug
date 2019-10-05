@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", href="/stylesheets/style.css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+  body
+    header
+      img(src="/images/logo.svg")
+    main
+      form(action="/search" method="get")
+        input(type="text" name="routeNo" placeholder="어느 버스를 찾을까요?")
+        button(type="submit") 찾기
+      p.currentLocation
+    footer Developed by Perlpark
+
+  script(src="/javascripts/currentLocation.js")
+
+
+  //- script(src="/javascripts/sendAjax.js")
+  //- script.
+  //-   let form = document.querySelector('form');
+  //-   form.addEventListener('submit', function(){
+  //-     event.preventDefault();
+  //-     //- var inputData = form.elements[0].value;
+  //-     //- sendAjax(`${window.location.href}/search`, lat, lng);
+  //-   });
