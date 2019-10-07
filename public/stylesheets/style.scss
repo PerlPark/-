@@ -1,0 +1,83 @@
+/* 변수 */
+$font_family: "Helvetica Neue","Apple SD Gothic Neo","Roboto","NotoSans","Malgun Gothic","맑은 고딕","돋움",dotum,sans-serif;
+$point_color: rgba(183,139,223,1);
+$point_color-hover: rgba(183,139,223,0.8);
+
+/* 초기화 */
+* {
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+body {
+  font-family: $font_family;
+  font-size:1em;
+
+  height: 100vh;
+  padding: 5vh 0;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header {
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+.user-current-position {
+  margin-top:30px;
+  padding: 0.2rem;
+  font-size:0.8em;
+  color: #9B9B9B;
+  border-width: 1px;
+  border-color: #ddd;
+  border-style: solid;
+  border-radius: 3px;
+}
+.material-icons.md-18 {
+  font-size:0.8em;
+}
+.form {
+  display:flex;
+  width:450px;
+  margin-bottom:15vh;
+  
+  * {
+    border-width: 0;
+    border-radius: 5px;
+    transition-property: all;
+    transition-duration: 0.5s;
+    box-shadow: 0 15px 30px -20px $point_color;
+
+    &:hover{
+      box-shadow: 0 15px 30px -15px $point_color;
+    }
+  }
+  input {
+    flex-grow: 1;
+    padding:1rem 1.5rem;
+    font-size:1.3em;
+  }
+  button {
+    flex: none;
+    margin-left:1rem;
+    color: #fff;
+    background-color: $point_color;
+    padding:1rem;
+
+    &:hover{
+      background-color: $point_color-hover;
+      box-shadow: 0 15px 30px -15px $point_color;
+    }
+  }
+}
+
+footer {
+  color: #cccccc;
+}
