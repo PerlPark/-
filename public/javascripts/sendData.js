@@ -1,6 +1,6 @@
-function sendData(method, url, data){
+function sendData(method, url, data, callback){
   /* form 속성 변경 */
-  let form = document.querySelector('.form');
+  let form = document.getElementById('form');
   form.action = url;
   form.method = method;
 
@@ -9,7 +9,9 @@ function sendData(method, url, data){
   xhr.onreadystatechange = function(){
     if(xhr.readyState === xhr.DONE){
       if(xhr.status === 200 || xhr.status === 201){
-        console.log(xhr.responseText);
+        if(callback){
+          callback(xhr.responseText);
+        }
       } else {
         console.error(xhr.responseText);
       }
@@ -17,7 +19,6 @@ function sendData(method, url, data){
   };
   xhr.open(method, url);
   xhr.setRequestHeader('Content-type', "application/json");
-  if(data){
-    xhr.send(data);
-  }
+  /* 인자로 받은 data가 있을 경우 */
+  data ? xhr.send(data) : xhr.send();
 }

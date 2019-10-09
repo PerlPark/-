@@ -1,6 +1,4 @@
 let textPlace = document.querySelector('.user-current-position');
-let latInput = document.querySelector('#latInput');
-let lngInput = document.querySelector('#lngInput');
 
 /* geolocation API 사용자 위치 받아오기 */
 /* geolocation API 사용할 수 없을 때 */
@@ -33,7 +31,13 @@ function error(){
 
 function printCurrentPosition(lat, lng){
   textPlace.innerHTML = `<i class="material-icons md-18">location_searching</i> ${lat}, ${lng}`;
-  setCurrentPositionToInput(lat, lng);
+  /* main 화면, input에 접근할 수 있을 때 */
+  let latInput = document.getElementById('latInput');
+  let lngInput = document.getElementById('lngInput');
+  if(latInput && lngInput){
+    latInput.value = lat;
+    lngInput.value = lng;
+  }
   getKakaoAPI(lat, lng);
 }
 
@@ -47,11 +51,4 @@ function getKakaoAPI(lat, lng){
     }
   };
   geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-}
-
-function setCurrentPositionToInput(lat, lng){
-  if(latInput && lngInput){
-    latInput.value = lat;
-    lngInput.value = lng;
-  }
 }

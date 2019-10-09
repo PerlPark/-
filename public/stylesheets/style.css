@@ -36,25 +36,30 @@ header {
 .material-icons.md-18 {
   font-size: 0.8em; }
 
-.form {
+form {
   display: flex;
   width: 100vw;
   max-width: 450px;
   margin-bottom: 15vh; }
-  .form * {
+  form * {
     border-width: 0;
     transition-property: all;
     transition-duration: 0.5s;
     box-shadow: 0 15px 30px -20px #b78bdf; }
-    .form *:hover {
+    form *:hover {
       box-shadow: 0 15px 30px -15px #b78bdf; }
-  .form input {
+    form *:focus {
+      outline: none; }
+  form input {
     flex-grow: 1;
     padding: 1rem 1.5rem;
     font-size: 1.3em;
     border: 1px #ccc solid;
     border-radius: 5px; }
-  .form select {
+  form .boundToList {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px; }
+  form select {
     width: 378px;
     max-height: 180px;
     overflow: scroll;
@@ -64,23 +69,26 @@ header {
     border: 1px #ccc solid;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px; }
-    .form select option {
-      padding: 0.5rem 0.8rem;
+    form select option {
+      padding: 0.8rem 1.1rem;
+      font-size: 1.2em;
       border-top-width: 1px;
       border-top-color: #ccc;
-      border-top-style: solid; }
-    .form select option:first-child {
+      border-top-style: solid;
+      box-shadow: none; }
+    form select option:first-child {
       border-top-width: 0; }
-    .form select option:hover {
-      background-color: #fffeee; }
-  .form button {
+    form select option:hover {
+      background-color: #fffeee;
+      box-shadow: none; }
+  form button {
     flex: none;
     margin-left: 1rem;
     color: #fff;
     border-radius: 5px;
     background-color: #b78bdf;
     padding: 1rem; }
-    .form button:hover {
+    form button:hover {
       background-color: rgba(183, 139, 223, 0.8);
       box-shadow: 0 15px 30px -15px #b78bdf; }
 

@@ -12,12 +12,7 @@ html
       img(src="/images/logo.svg")
       p.user-current-position
     main
-      ul.result-list
-        each data in dataList
-          li #{data.stationName}
-            span #{data.stationCode}
-            p #{data.plateNo1}
-              span #{data.predictTime1} 분 후 도착 (#{data.locationNo1}번 째 정류장 전)
+      p= message
     footer Developed by Perlpark
 
   script(src="/javascripts/getCurrentPosition.js")

@@ -44,7 +44,7 @@ header {
   font-size:0.8em;
 }
 
-.form {
+form {
   display:flex;
   width:100vw;
   $widthSize: 450px;
@@ -57,8 +57,11 @@ header {
     transition-duration: 0.5s;
     box-shadow: 0 15px 30px -20px $point_color;
 
-    &:hover{
+    &:hover {
       box-shadow: 0 15px 30px -15px $point_color;
+    }
+    &:focus {
+      outline: none;
     }
   }
   input {
@@ -67,6 +70,10 @@ header {
     font-size:1.3em;
     border:1px #ccc solid;
     border-radius: 5px;
+  }
+  .boundToList {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
   select {
     width: $widthSize - 72px;
@@ -80,16 +87,19 @@ header {
     border-bottom-right-radius: 5px;
 
     option {
-      padding: 0.5rem 0.8rem;
+      padding: 0.8rem 1.1rem;
+      font-size:1.2em;
       border-top-width: 1px;
       border-top-color: #ccc;
       border-top-style: solid;
+      box-shadow: none;
     }
     option:first-child {
       border-top-width: 0;
     }
     option:hover {
       background-color: #fffeee;
+      box-shadow: none;
     }
   }
   button {
