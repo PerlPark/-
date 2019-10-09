@@ -1,23 +1,14 @@
 doctype html
 html
-  head
-    title= title
-    link(rel="stylesheet", href="/stylesheets/style.css")
-    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
-    script(src="/javascripts/sendData.js")
-    script(src="//developers.kakao.com/sdk/js/kakao.min.js")
-    script(type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c09c9d8ca088258922c4d00cde9ec05d&libraries=services")
+  include includes/head.pug
   body
-    header
-      img(src="/images/logo.svg")
-      p.user-current-position
-    main
-      ul.result-list
-        each data in dataList
-          li #{data.stationName}
-            span #{data.stationCode}
-            p #{data.plateNo1}
-              span #{data.predictTime1} 분 후 도착 (#{data.locationNo1}번 째 정류장 전)
-    footer Developed by Perlpark
-
+  include includes/header.pug
+  main
+    ul.result-list
+      each data in dataList
+        li #{data.stationName}
+          span #{data.stationCode}
+          p #{data.plateNo1}
+            span #{data.predictTime1} 분 후 도착 (#{data.locationNo1}번 째 정류장 전)
   script(src="/javascripts/getCurrentPosition.js")
+  include includes/footer.pug

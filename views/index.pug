@@ -1,25 +1,16 @@
 doctype html
 html
-  head
-    title= title
-    link(rel="stylesheet", href="/stylesheets/style.css")
-    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
-    script(src="/javascripts/sendData.js")
-    script(src="//developers.kakao.com/sdk/js/kakao.min.js")
-    script(type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c09c9d8ca088258922c4d00cde9ec05d&libraries=services")
+  include includes/head.pug
   body
-    header
-      img(src="/images/logo.svg")
-      span for 경기도
-      p.user-current-position
-    main
-      form#form(action="/search" method="get")
-        input(id="latInput" type="hidden" name="lat")
-        input(id="lngInput" type="hidden" name="lng")
-        input(id="routeIdInput" type="hidden" name="id")
-        input(id="routeNoInput" type="text" autocomplete="off" placeholder="어느 버스를 찾을까요?")
-        button(type="submit")
-          i(class="material-icons") search
-    footer Developed by Perlpark
-  script(src="/javascripts/getCurrentPosition.js")
-  script(src="/javascripts/searchBus.js")
+  include includes/header.pug
+  main
+    form#form(action="/search" method="get")
+      input(id="latInput" type="hidden" name="lat")
+      input(id="lngInput" type="hidden" name="lng")
+      input(id="routeIdInput" type="hidden" name="id")
+      input(id="routeNoInput" type="text" autocomplete="off" placeholder="어느 버스를 찾을까요?")
+      button(type="submit")
+        i(class="material-icons") search
+    script(src="/javascripts/getCurrentPosition.js")
+    script(src="/javascripts/searchBus.js")
+  include includes/footer.pug
