@@ -63,7 +63,7 @@ router.get('/search', function(req, res) {
     });
   }).catch(function(error) {
     console.log(error);
-    res.render('error', { message: `${error} | 현재 내 주변 500m 안에 정류장이 없습니다.` });
+    res.render('error', { message: `현재 내 주변 200m 안에 정류장이 없습니다.` });
   });
 });
 
