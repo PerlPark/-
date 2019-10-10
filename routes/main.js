@@ -52,18 +52,18 @@ function busRoute(routeNo, func){
 /* ************************************************* */
 /* ******************** search  ******************** */
 router.get('/search', function(req, res) {
-  getAroundStation(req.query.lat, req.query.lng)
-  .then(function(aroundStation){
-    getBusArrivalData(aroundStation, req.query.routeId)
+  getAroundStation(req.query.lat, req.query.lng) /* Step 1. 주변 정류소 목록 조회 API */
+  .then(function(aroundStation, routeId = req.query.routeId){
+    getBusArrivalData(aroundStation, routeId)
     .then(function(data){
       res.render('search', { dataList: data } );
-    }).catch(function(error) {
+    }).catch(function(error, routeName = req.query.routeName) {
       console.log(error);
-      res.render('error', { message: `현재 내 주변에 ${req.query.routeId}번 버스 이용이 가능한 정류장이 없습니다.` });
+      res.render('error', { message: `현재 내 주변에 ${routeName}번 버스 이용이 가능한 정류장이 없습니다.` });
     });
   }).catch(function(error) {
     console.log(error);
-    res.render('error', { message: `현재 내 주변 500m 안에 정류장이 없습니다.` });
+    res.render('error', { message: `${error} | 현재 내 주변 500m 안에 정류장이 없습니다.` });
   });
 });
 
@@ -76,12 +76,13 @@ function getAroundStation(lat, lng){
     let API = require('../config/api.json');
     let url = `${API.aroundStation_gyeonggi.url}?serviceKey=${API.KEY}&x=${lng}&y=${lat}`;
 
+    /* url에 x, y값 받아올 수 있을 때 실행 됨 */
     request(url, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
+      if (!error && response.statusCode === 200) {
         let $ = cheerio.load(body);
         let result = [];
         if($('busStationAroundList').length <= 0){
-          reject('getAroundStation > request오류!');
+          reject('getAroundStation 오류! > busStationAroundList 값 없음');
         } else {
           $('busStationAroundList').each(function(){
             let stationId = $(this).find('stationId').text();
@@ -89,11 +90,13 @@ function getAroundStation(lat, lng){
             let stationCode = $(this).find('mobileNo').text();
             result.push({'id': stationId, 'name': stationName, 'code': stationCode});  
           });
+          console.log(result);
           resolve(result);
         }
-      } else {
-        reject('getAroundStation 오류!');
-      }
+      } else if(error){
+        console.log(response.statusCode);
+        reject('getAroundStation 오류! > request오류!');
+      } 
     });
   });
 }
@@ -107,7 +110,7 @@ function getBusArrivalData(aroundStation, routeId){
     function recusionRequest(aroundStationItem, result){
       let url = `${API.busArrival_gyeonggi.url}?serviceKey=${API.KEY}&${API.busArrival_gyeonggi.param}=${aroundStationItem.id}`;
       request(url, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode === 200) {
           let $ = cheerio.load(body);
           if($('busArrivalList').length > 0){
             $('busArrivalList').each(function(i){
@@ -125,7 +128,6 @@ function getBusArrivalData(aroundStation, routeId){
                   "locationNo1": locationNo1,
                   "predictTime1": predictTime1
                 };
-                console.log(aroundStationItem);
                 console.log(data);
                 console.log("===========================================");
                 result.push(data);
@@ -136,18 +138,16 @@ function getBusArrivalData(aroundStation, routeId){
         if(aroundStation.length > 0){
           recusionRequest(aroundStation.shift(), result);
         } else {
-          returnResult();
+          if(result.length <= 0){
+            console.log('reject를 실행합니다.');
+            reject('getBusArrivalData 오류! > 결과 값이 없음');
+          }
+          resolve(result);
         }
       });
     }
     /* recusionRequest 실행 */
     recusionRequest(aroundStation.shift(), []);
-    function returnResult(){
-      if(result = []){
-        reject('getBusArrivalData 오류! > 결과 값이 없음');
-      }
-      resolve(result);
-    }
   });
 }
 

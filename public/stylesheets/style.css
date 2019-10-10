@@ -61,17 +61,21 @@ form {
     border-bottom-right-radius: 0px; }
   form select {
     width: 378px;
-    max-height: 180px;
+    max-height: 160px;
     overflow: scroll;
     position: absolute;
     margin-top: 57px;
     background-color: white;
     border: 1px #ccc solid;
     border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px; }
+    border-bottom-right-radius: 5px;
+    /* 네이티브 외형 감추기 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; }
     form select option {
       padding: 0.8rem 1.1rem;
-      font-size: 1.2em;
+      font-size: 1.3em;
       border-top-width: 1px;
       border-top-color: #ccc;
       border-top-style: solid;
@@ -81,6 +85,10 @@ form {
     form select option:hover {
       background-color: #fffeee;
       box-shadow: none; }
+    form select .hiddenItem {
+      display: none;
+      height: 0px;
+      padding: 0px; }
   form button {
     flex: none;
     margin-left: 1rem;
@@ -92,5 +100,11 @@ form {
       background-color: rgba(183, 139, 223, 0.8);
       box-shadow: 0 15px 30px -15px #b78bdf; }
 
+/* 검색 결과 리스트 */
+.result-list p span {
+  margin-left: 16px;
+  color: #FF9393; }
+
 footer {
-  color: #cccccc; }
+  color: #cccccc;
+  text-align: center; }
