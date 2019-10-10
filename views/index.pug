@@ -7,7 +7,8 @@ html
     form#form(action="/search" method="get")
       input(id="latInput" type="hidden" name="lat")
       input(id="lngInput" type="hidden" name="lng")
-      input(id="routeIdInput" type="hidden" name="id")
+      input(id="routeNameInput" type="hidden" name="routeName")
+      input(id="routeIdInput" type="hidden" name="routeId")
       input(id="routeNoInput" type="text" autocomplete="off" placeholder="어느 버스를 찾을까요?")
       button(type="submit")
         i(class="material-icons") search
