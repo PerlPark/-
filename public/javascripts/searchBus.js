@@ -1,6 +1,5 @@
 let form = document.getElementById('form');
 let busInput = document.getElementById('routeNoInput');
-let routeNameInput = document.getElementById('routeNameInput');
 
 let printRouteList = function(responseText){
   let routeListData = JSON.parse(responseText);
@@ -24,31 +23,35 @@ let printRouteList = function(responseText){
       let route = routeListData[i];
       let item = document.createElement('option');
       item.textContent = `${route.name} | ${route.region} | ${route.typeName}`;
-      item.setAttribute('value', route.id);
+      item.setAttribute('data-id', route.id);
+      item.setAttribute('data-name', route.name);
       item.addEventListener('click', selectRouteItem);
       routeList.appendChild(item);
     }
-    form.insertBefore(routeList, form.children[3]);
+    form.insertBefore(routeList, form.lastChild);
   } 
 }
 
 /* 키워드 입력 시 실시간 버스 검색 후 출력 */
 busInput.onkeyup = function(){
-  routeNameInput.value = busInput.value;
   sendData('POST', '/', JSON.stringify({routeNo: `${busInput.value}`}), printRouteList);
 }
 
 /* select > option 요소 클릭 시 */
 function selectRouteItem(){
   /* 이미 생성된 select 박스 및 스타일 class 제거 */
-  busInput.removeAttribute("class");
+  let routeIdInput = document.getElementById('routeIdInput');
+  let routeNameInput = document.getElementById('routeNameInput');
   let relatedRouteList = document.getElementsByTagName('select')[0];
+
+  routeIdInput.value = this.dataset.id;
+  routeNameInput.value = this.dataset.name;
+  busInput.value = this.textContent;
+
+  busInput.removeAttribute("class");
   if(relatedRouteList){
     form.removeChild(relatedRouteList);
   }
-  let routeIdInput = document.getElementById('routeIdInput');
-  routeIdInput.value = this.value;
-  busInput.value = this.textContent;
 }
 
 /* 키워드 수정 시 */
