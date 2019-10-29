@@ -1,10 +1,8 @@
-function sendData(method, url, data, callback){
-  /* form 속성 변경 */
+function ajaxRequest(method, url, data, callback){
   let form = document.getElementById('form');
   form.action = url;
   form.method = method;
-
-  /* Ajax */
+  
   let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function(){
     if(xhr.readyState === xhr.DONE){

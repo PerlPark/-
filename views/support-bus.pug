@@ -4,8 +4,9 @@ html
   body
   include includes/header.pug
   main
-    h1= title
+    h1 지원하는 버스 목록
     ul
     each bus in busList
       li #{bus.region} | #{bus.id} | #{bus.name} | #{bus.typeName} | #{bus.typeCode}
-  include includes/footer.pug
+  script(src="/javascripts/getCurrentPosition.js")
+  script(src="/javascripts/support-bus.js")

@@ -1,11 +1,27 @@
-let available = function(req, res) {
+let main = function(req, res) {
+  res.render('main', { title: '버스야 어디가니?' });
+}
+
+let loading = function(req, res) {
   getBusList().then(function(result){
-    res.render('bus-list', { title: '지원하는 버스 목록', busList: result });
+    res.send(result);
+  }).catch(function(code){
+    res.send('오류 발생');
+  });
+}
+
+let searchBus = function(req, res) {
+  res.render('search-bus', { title: '버스야 어디가니? > 버스 검색' });
+}
+
+let supportBus = function(req, res) {
+  getBusList().then(function(result){
+    console.log(result);
+    res.render('support-bus', { title: '버스야 어디가니? > 지원하는 버스 목록', busList: result });
   }).catch(function(code){
     res.render('error', { message: code });
   });
 }
-
 
 /* 페이지 접속 시 버스 노선 목록 가져오기 */
 function getBusList(){
@@ -45,5 +61,8 @@ function getBusList(){
 }
 
 module.exports = {
-  available: available
+  main: main,
+  loading: loading,
+  searchBus: searchBus,
+  supportBus: supportBus
 };

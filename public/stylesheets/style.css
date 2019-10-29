@@ -1,5 +1,9 @@
 @charset "UTF-8";
-/* 변수 */
+/* font */
+/* color */
+/* 그라디언트 배경 */
+/* position:absolute 화면 배치 */
+/* flex */
 /* 초기화 */
 * {
   padding: 0;
@@ -11,100 +15,207 @@
 body {
   font-family: "Helvetica Neue", "Apple SD Gothic Neo", "Roboto", "NotoSans", "Malgun Gothic", "맑은 고딕", "돋움", dotum, sans-serif;
   font-size: 1em;
-  height: 100vh;
-  padding: 5vh 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between; }
+  color: #5a5a5a;
+  background: #CA9DF2;
+  /* Old Browsers */
+  background: -moz-linear-gradient(top, #CA9DF2 0%, #895DFF 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, #CA9DF2), color-stop(100%, #895DFF));
+  /* Chrome, Safari4+ */
+  background: -webkit-linear-gradient(top, #CA9DF2 0%, #895DFF 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #CA9DF2 0%, #895DFF 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #CA9DF2 0%, #895DFF 100%);
+  /* IE 10+ */
+  background: linear-gradient(to bottom, #CA9DF2 0%, #895DFF 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$color1, endColorstr=$color2, GradientType=0 );
+  /* IE6-9 */
+  background-attachment: fixed; }
 
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center; }
-
-.user-current-position {
-  margin-top: 30px;
-  padding: 0.2rem;
-  font-size: 0.8em;
-  color: #9B9B9B;
-  border-width: 1px;
-  border-color: #ddd;
-  border-style: solid;
-  border-radius: 3px; }
-
-.material-icons.md-18 {
-  font-size: 0.8em; }
-
-form {
-  display: flex;
+/* 화면 최대 사이즈 - PC */
+header, main, footer {
   width: 100vw;
-  max-width: 450px;
-  margin-bottom: 15vh; }
+  max-width: 600px; }
+
+/* 중앙 정렬 */
+header, main, footer {
+  margin: 0 auto;
+  text-align: center; }
+
+/* Modal */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: 60%;
+  max-width: 300px;
+  background-color: white;
+  padding: 30px; }
+
+.button-style {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  text-decoration: none;
+  font-size: 0.9em;
+  color: white;
+  padding: 13px 18px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 25px; }
+
+/* 로딩 스플래시 */
+/* 메인 화면 */
+header {
+  text-align: center; }
+
+.logo {
+  width: 20%;
+  margin-top: 20px;
+  margin-bottom: 5px; }
+
+#position-textfield {
+  padding: 0.2rem 0.3rem 0.2rem 20px;
+  font-size: 0.75em;
+  color: rgba(255, 255, 255, 0.5);
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.5);
+  border-style: solid;
+  border-radius: 5px; }
+
+.loading {
+  background-image: url("../images/loading.svg");
+  background-size: auto 70%;
+  background-position: 2px center;
+  background-repeat: no-repeat; }
+
+.gps-on {
+  padding-left: 18px !important;
+  background-image: url("../images/gps.svg");
+  background-size: auto 60%;
+  background-position: 3px center;
+  background-repeat: no-repeat; }
+
+/* 메인 화면 - Form */
+form {
+  margin: 25vh auto 30vh auto;
+  text-align: center; }
   form * {
     border-width: 0;
     transition-property: all;
-    transition-duration: 0.5s;
-    box-shadow: 0 15px 30px -20px #b78bdf; }
-    form *:hover {
-      box-shadow: 0 15px 30px -15px #b78bdf; }
-    form *:focus {
-      outline: none; }
-  form input {
-    flex-grow: 1;
-    padding: 1rem 1.5rem;
-    font-size: 1.3em;
-    border: 1px #ccc solid;
-    border-radius: 5px; }
-  form .boundToList {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px; }
-  form select {
-    width: 378px;
-    max-height: 160px;
-    overflow: scroll;
-    position: absolute;
-    margin-top: 57px;
-    background-color: white;
-    border: 1px #ccc solid;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    /* 네이티브 외형 감추기 */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none; }
-    form select option {
-      padding: 0.8rem 1.1rem;
-      font-size: 1.3em;
-      border-top-width: 1px;
-      border-top-color: #ccc;
-      border-top-style: solid;
-      box-shadow: none; }
-    form select option:first-child {
-      border-top-width: 0; }
-    form select option:hover {
-      background-color: #fffeee;
-      box-shadow: none; }
-    form select .hiddenItem {
-      display: none;
-      height: 0px;
-      padding: 0px; }
+    transition-duration: 0.5s; }
+  form div {
+    display: inline;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.2) 0 3px 10px; }
+  form #search-position a {
+    color: white;
+    text-decoration: none;
+    border-bottom: 3px white solid;
+    cursor: pointer; }
+  form #search-bus a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    border-bottom: 3px rgba(255, 255, 255, 0.5) solid;
+    cursor: pointer; }
   form button {
-    flex: none;
-    margin-left: 1rem;
-    color: #fff;
-    border-radius: 5px;
-    background-color: #b78bdf;
-    padding: 1rem; }
-    form button:hover {
-      background-color: rgba(183, 139, 223, 0.8);
-      box-shadow: 0 15px 30px -15px #b78bdf; }
+    width: 50px;
+    height: 50px;
+    color: #CA9DF2;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    margin-left: 15px; }
 
-/* 검색 결과 리스트 */
-.result-list p span {
-  margin-left: 16px;
-  color: #FF9393; }
+/* 메인 화면 - bookmark */
+#bookmark {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 0.75em; }
+  #bookmark h2 {
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 1em; }
+  #bookmark p {
+    text-align: center; }
 
-footer {
-  color: #cccccc;
-  text-align: center; }
+/* 검색 화면 - 공통 */
+.search {
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  flex-direction: column;
+  height: 100vh; }
+  .search header {
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;
+    /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    flex-direction: row;
+    padding: 20px; }
+    .search header #arrow-back {
+      background-color: transparent;
+      background-image: url("../images/arrow_back.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 70%;
+      border: 0;
+      color: white;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px; }
+    .search header input {
+      -webkit-box-flex: 1;
+      /* OLD - iOS 6-, Safari 3.1-6 */
+      -moz-box-flex: 1;
+      /* OLD - Firefox 19- */
+      width: 500px;
+      /* For old syntax, otherwise collapses. */
+      -webkit-flex: 1;
+      /* Chrome */
+      -ms-flex: 1;
+      /* IE 10 */
+      flex: 1;
+      /* NEW, Spec - Opera 12.1, Firefox 20+ */
+      height: 50px;
+      border-radius: 5px;
+      border: 0;
+      font-size: 1.2em;
+      padding: 1.2rem; }
+  .search main {
+    background-color: white;
+    -webkit-box-flex: 1;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;
+    /* OLD - Firefox 19- */
+    height: 100%;
+    /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;
+    /* Chrome */
+    -ms-flex: 1;
+    /* IE 10 */
+    flex: 1;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */ }

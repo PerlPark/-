@@ -1,7 +1,6 @@
-/* 변수 */
-$font_family: "Helvetica Neue","Apple SD Gothic Neo","Roboto","NotoSans","Malgun Gothic","맑은 고딕","돋움",dotum,sans-serif;
-$point_color: rgba(183,139,223,1);
-$point_color-hover: rgba(183,139,223,0.8);
+@import '_variable.scss';
+@import '_mixin.scss';
+
 
 /* 초기화 */
 * {
@@ -15,126 +14,205 @@ $point_color-hover: rgba(183,139,223,0.8);
 body {
   font-family: $font_family;
   font-size:1em;
-
-  height: 100vh;
-  padding: 5vh 0;
-  display:flex;
-  flex-direction:column;
-  align-items: center;
-  justify-content: space-between;
+  color: $dark_color;
+  @include background-gradient(#CA9DF2, #895DFF); 
 }
 
-header {
-  display:flex;
-  flex-direction:column;
-  align-items: center;
-}
-
-.user-current-position {
-  margin-top:30px;
-  padding: 0.2rem;
-  font-size:0.8em;
-  color: #9B9B9B;
-  border-width: 1px;
-  border-color: #ddd;
-  border-style: solid;
-  border-radius: 3px;
-}
-.material-icons.md-18 {
-  font-size:0.8em;
-}
-
-form {
-  display:flex;
+/* 화면 최대 사이즈 - PC */
+header, main, footer {
   width:100vw;
-  $widthSize: 450px;
-  max-width:$widthSize;
-  margin-bottom:15vh;
-  
+  max-width: 600px;
+}
+
+/* 중앙 정렬 */
+header, main, footer {
+  margin:0 auto;
+  text-align: center;
+}
+
+
+/* Modal */
+.modal {
+  @include absolute-translate(50%, 50%, -50%, -50%);
+  width: 60%;
+  max-width:300px;
+  background-color: $light_color;
+  padding: 30px;
+}
+
+.button-style {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  text-decoration: none;
+  font-size: 0.9em;
+  color: $light_color;
+  padding: 13px 18px;
+  background-color: $dark_color-alpha05;
+  border-radius: 25px;
+}
+
+
+/* 로딩 스플래시 */
+// .intro {
+//   text-align: center;
+//   color: $font_color-alpha05;
+
+//   main {
+//     position: relative;
+//     height: 75vh;
+//   }
+//   .logo {
+//     width: 60%;
+//     margin-top: 20vh;
+//   }
+//   footer {
+//     height: 25h;
+
+//     .messageBlock {
+//       margin-bottom: 50px;
+//     }
+//     .message {
+//       padding-left: 25px;
+//       background-image: url('../images/loading.svg');
+//       background-size: auto 90%;
+//       background-position-y: center;
+//       background-repeat: no-repeat;
+//     }
+//   }
+// }
+
+/* 메인 화면 */
+header {
+  text-align: center;
+}
+
+.logo {
+  width: 20%;
+  margin-top:20px;
+  margin-bottom:5px;
+}
+
+#position-textfield {
+  padding: 0.2rem 0.3rem 0.2rem 20px;
+  font-size:0.75em;
+  color: $light_color-alpha05;
+  border-width: 1px;
+  border-color: $light_color-alpha05;
+  border-style: solid;
+  border-radius: 5px;
+}
+.loading {
+  background-image: url('../images/loading.svg');
+  background-size: auto 70%;
+  background-position: 2px center;
+  background-repeat: no-repeat;
+}
+.gps-on {
+  padding-left: 18px !important;
+  background-image: url('../images/gps.svg');
+  background-size: auto 60%;
+  background-position: 3px center;
+  background-repeat: no-repeat;
+}
+
+/* 메인 화면 - Form */
+form {
+  margin: 25vh auto 30vh auto;
+  text-align: center;
+
   * {
     border-width: 0;
     transition-property: all;
     transition-duration: 0.5s;
-    box-shadow: 0 15px 30px -20px $point_color;
-
-    &:hover {
-      box-shadow: 0 15px 30px -15px $point_color;
-    }
-    &:focus {
-      outline: none;
-    }
   }
-  input {
-    flex-grow: 1;
-    padding:1rem 1.5rem;
-    font-size:1.3em;
-    border:1px #ccc solid;
-    border-radius: 5px;
+  div {
+    display: inline;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: $light_color;
+    text-shadow: $dark_color-alpha05 0 3px 10px;
   }
-  .boundToList {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+  #search-position a {
+    color: $light_color;
+    text-decoration: none;
+    border-bottom: 3px $light_color solid;
+    cursor: pointer;
   }
-  select {
-    width: $widthSize - 72px;
-    max-height: 160px;
-    overflow: scroll;
-    position: absolute;
-    margin-top: 57px;
-    background-color: white;
-    border:1px #ccc solid;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    /* 네이티브 외형 감추기 */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    option {
-      padding: 0.8rem 1.1rem;
-      font-size:1.3em;
-      border-top-width: 1px;
-      border-top-color: #ccc;
-      border-top-style: solid;
-      box-shadow: none;
-    }
-    option:first-child {
-      border-top-width: 0;
-    }
-    option:hover {
-      background-color: #fffeee;
-      box-shadow: none;
-    }
-    .hiddenItem {
-      display: none;
-      height: 0px;
-      padding: 0px;
-    }
+  #search-bus a {
+    color: $light_color-alpha05;
+    text-decoration: none;
+    border-bottom: 3px $light_color-alpha05 solid;
+    cursor: pointer;
   }
   button {
-    flex: none;
-    margin-left:1rem;
-    color: #fff;
-    border-radius: 5px;
-    background-color: $point_color;
-    padding:1rem;
+    width: 50px;
+    height: 50px;
+    color: $point_color;
+    background-color: $light_color;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px $dark_color-alpha05;
+    margin-left: 15px;
+  }
+}
 
-    &:hover{
-      background-color: $point_color-hover;
-      box-shadow: 0 15px 30px -15px $point_color;
+/* 메인 화면 - bookmark */
+#bookmark {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 5px;
+  background-color: $light_color;
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 0.75em;
+  
+  h2 {
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+
+/* 검색 화면 - 공통 */
+
+.search {
+  @include flex-parent();
+  flex-direction: column;
+  height: 100vh;
+
+  header {
+    @include flex-parent();
+    flex-direction: row;
+    padding: 20px;
+
+    #arrow-back {
+      background-color: transparent;
+      background-image: url('../images/arrow_back.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 70%;
+      border: 0;
+      color: $light_color;
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+    input {
+      @include flex-width-child(1);
+      height: 50px;
+      border-radius: 5px;
+      border: 0;
+      font-size: 1.2em;
+      padding: 1.2rem;
     }
   }
-}
 
-/* 검색 결과 리스트 */
-.result-list {
-  p span {
-    margin-left: 16px;
-    color: #FF9393;
+  main {
+    background-color: $light_color;
+    @include flex-height-child(1);
   }
-}
-
-footer {
-  color: #cccccc;
-  text-align: center;
 }

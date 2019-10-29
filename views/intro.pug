@@ -1,0 +1,17 @@
+doctype html
+html
+  include includes/head.pug
+  body.intro
+  main
+    img.logo(src="/images/logo_white.svg")
+    form#form(action="/" method="GET")
+      input(id="latInput" type="hidden" name="lat")
+      input(id="lngInput" type="hidden" name="lng")
+  footer
+    p.messageBlock
+      span.message 필수 데이터를 받는 중 입니다.
+    p * 현재는 경기도 버스만 조회할 수 있어요!
+    p
+      small Beta 0.1 Developed by Perlpark
+    script(src="/javascripts/getCurrentPosition.js")
+    script(src="/javascripts/startLoading.js")

@@ -1,4 +1,9 @@
 let form = document.getElementById('form');
+form.onsubmit = function(){
+  sendData('GET', '/search');
+}
+
+
 let busInput = document.getElementById('routeNoInput');
 
 let printRouteList = function(responseText){
@@ -62,6 +67,3 @@ busInput.onclick = function(){
 }
 
 /* 폼 제출 */
-form.onsubmit = function(){
-  sendData('GET', '/search');
-}

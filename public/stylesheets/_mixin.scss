@@ -1,0 +1,48 @@
+/* 그라디언트 배경 */
+@mixin background-gradient($color1, $color2) {
+  background: $color1;/* Old Browsers */
+  background: -moz-linear-gradient(top, $color1 0%, $color2 100%); /* FF3.6+ */
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, $color1), color-stop(100%, $color2));/* Chrome, Safari4+ */
+  background: -webkit-linear-gradient(top, $color1 0%, $color2 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, $color1 0%, $color2 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, $color1 0%, $color2 100%); /* IE 10+ */
+  background: linear-gradient(to bottom, $color1 0%, $color2 100%);/* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$color1, endColorstr=$color2, GradientType=0 );/* IE6-9 */
+  background-attachment: fixed;
+}
+
+/* position:absolute 화면 배치 */
+@mixin absolute-translate($left, $top, $x, $y) {
+  position:absolute;
+  top: $top;
+  left: $left;
+  -webkit-transform: translateX($x) translateY($y);
+  -moz-transform: translateX($x) translateY($y);
+  transform: translateX($x) translateY($y);
+}
+
+/* flex */
+@mixin flex-parent() {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex-height-child($size) {
+  -webkit-box-flex: $size;      /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: $size;         /* OLD - Firefox 19- */
+  height: 100%;        /* For old syntax, otherwise collapses. */
+  -webkit-flex: $size;          /* Chrome */
+  -ms-flex: $size;              /* IE 10 */
+  flex: $size;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+@mixin flex-width-child($size) {
+  -webkit-box-flex: $size;      /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: $size;         /* OLD - Firefox 19- */
+  width: 500px;        /* For old syntax, otherwise collapses. */
+  -webkit-flex: $size;          /* Chrome */
+  -ms-flex: $size;              /* IE 10 */
+  flex: $size;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
