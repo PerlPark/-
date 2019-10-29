@@ -11,6 +11,7 @@ app.set('view engine','pug');
 /* 라우터 */
 let router = require('./routes/main');
 app.use('/', router);
+app.use('/position', router);
 app.use('/bus', router);
 app.use('/support/bus', router);
 

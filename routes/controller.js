@@ -10,6 +10,10 @@ let loading = function(req, res) {
   });
 }
 
+let searchPosition = function(req, res) {
+  res.render('search-position', { title: '버스야 어디가니? > 위치 지정' });
+}
+
 let searchBus = function(req, res) {
   res.render('search-bus', { title: '버스야 어디가니? > 버스 검색' });
 }
@@ -63,6 +67,7 @@ function getBusList(){
 module.exports = {
   main: main,
   loading: loading,
+  searchPosition: searchPosition,
   searchBus: searchBus,
   supportBus: supportBus
 };
