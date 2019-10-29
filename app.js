@@ -14,6 +14,7 @@ app.use('/', router);
 app.use('/bus', router);
 app.use('/support/bus', router);
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+var port = process.env.PORT || 3000;
+app.listen(port, function(){
+  console.log('Server On!');
 });
