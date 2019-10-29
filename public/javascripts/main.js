@@ -8,7 +8,7 @@ document.getElementById('search-position').onclick = function(){
   if(!isAvailable){
     error(1);
   } else {
-    location.replace('/position');
+    location.href('/position');
   }
 }
 
@@ -17,7 +17,7 @@ document.getElementById('search-bus').onclick = function(){
   if(!isAvailable){
     error(1);
   } else {
-    location.replace('/bus');
+    location.href('/bus');
   }
 }
 

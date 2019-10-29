@@ -45,3 +45,10 @@ let error = function(code){
   }
   alert(message);
 }
+
+/* 뒤로가기 버튼 */
+if(document.getElementById('#arrow-back')){
+  document.getElementById('#arrow-back').onclick = function(){
+    window.history.back();
+  }
+}
