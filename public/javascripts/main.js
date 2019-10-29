@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function(){
   getCurrentPosition();
-  getBusList();
+  // getBusList();
+
+  // 즐겨찾기한 도착 정보 있을 경우
+  if(bookmarkList){
+    document.getElementById('bookmark').classList.remove('hidden');
+  }
 });
 
 document.getElementById('search-position').onclick = function(){

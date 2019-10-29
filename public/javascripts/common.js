@@ -25,9 +25,6 @@ let modal = function(message, id){
   }
 };
 
-/* 버스 노선 목록 */
-let busList = [];
-
 /* 앱 이용 불가 얼럿 출력 */
 let error = function(code){
   // CODE
