@@ -189,7 +189,7 @@ form {
     flex-direction: row;
     padding: 20px;
 
-    #arrow-back {
+    #btn-back{
       background-color: transparent;
       background-image: url('../images/arrow_back.svg');
       background-repeat: no-repeat;
@@ -208,6 +208,7 @@ form {
       border: 0;
       font-size: 1.2em;
       padding: 1.2rem;
+      box-shadow: 0 3px 10px $dark_color-alpha05;
     }
   }
 
@@ -216,3 +217,5 @@ form {
     @include flex-height-child(1);
   }
 }
+
+@import '_media.scss';

@@ -176,7 +176,7 @@ form {
     /* NEW, Spec - Opera 12.1, Firefox 20+ */
     flex-direction: row;
     padding: 20px; }
-    .search header #arrow-back {
+    .search header #btn-back {
       background-color: transparent;
       background-image: url("../images/arrow_back.svg");
       background-repeat: no-repeat;
@@ -204,7 +204,8 @@ form {
       border-radius: 5px;
       border: 0;
       font-size: 1.2em;
-      padding: 1.2rem; }
+      padding: 1.2rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); }
   .search main {
     background-color: white;
     -webkit-box-flex: 1;
