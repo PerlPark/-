@@ -12,44 +12,78 @@ document.getElementById('btn-back').onclick = function(){
 
 /* 키워드 입력 시 실시간 버스 검색 후 출력 */
 document.getElementById('routeNoInput').onkeyup = function(){
-  // sendData('POST', '/bus', JSON.stringify({routeNo: `${this.value}`}), printRouteList);
-  console.log(this.value);
+  /* 검색어 없을 때 - blank 백그라운드 노출 */
+  if(this.value === ''){
+    let ul = document.getElementsByTagName('ul')[0];
+    if(ul){
+      document.getElementById('result').removeChild(ul);
+    }
+  } else {
+    ajaxRequest('POST', '/bus', JSON.stringify({routeNo: `${this.value}`}), printRouteList);
+  }
 }
 
-// let printRouteList = function(responseText){
-//   let routeListData = JSON.parse(responseText);
-//   /* 이미 생성된 select 박스 있으면 제거 */
-//   let routeList = document.getElementsByTagName('select')[0];
-//   if(routeList){
-//     form.removeChild(routeList);
-//   }
-//   /* 검색어 없을 때 */
-//   if(busInput.value === '' || typeof routeListData[0] === 'string'){
-//     busInput.removeAttribute("class");
-//   /* 검색결과 있을 때 */
-//   } else if(routeListData.length > 0){
-//     busInput.setAttribute('class', 'boundToList');
-//     let routeList = document.createElement('select');
-//     routeList.setAttribute('multiple', '');
-//     if(routeListData.length <= 3){
-//       routeList.style.height = (routeListData.length * 46)+'px';
-//     }
-//     for(let i = 0; i < routeListData.length; i++){
-//       let route = routeListData[i];
-//       let item = document.createElement('option');
-//       item.textContent = `${route.name} | ${route.region} | ${route.typeName}`;
-//       item.setAttribute('data-id', route.id);
-//       item.setAttribute('data-name', route.name);
-//       item.addEventListener('click', selectRouteItem);
-//       routeList.appendChild(item);
-//     }
-//     form.insertBefore(routeList, form.lastChild);
-//   } 
-// }
+let printRouteList = function(responseText){
+  let routeListData = JSON.parse(responseText);
+  console.log(routeListData);
 
+  /* 이미 생성된 select 박스 있으면 제거 */
+  let ul = document.getElementsByTagName('ul')[0];
+  if(ul){
+    document.getElementById('result').removeChild(ul);
+  }
 
+  if(routeListData.length > 0){
+    let ul = document.createElement('ul');
+    
+    for(let i = 0; i < routeListData.length; i++){
+      let route = routeListData[i];
+      let item = document.createElement('li');
+      item.setAttribute('data-id', route.id);
+      item.setAttribute('data-name', route.name);
+      item.addEventListener('click', selectRouteItem);
 
-// /* select > option 요소 클릭 시 */
-// function selectRouteItem(){
-//   // sendData('POST', '/', JSON.stringify({routeNo: `${this.value}`}));
-// }
+      let name = document.createElement('p');
+      name.textContent = route.name;
+      let type = document.createElement('span');
+      type.setAttribute('class', 'type');
+      switch (route.typeCode){
+        case '11':
+        case '16':
+          type.textContent = '직행';
+          type.classList.add('red');
+          break;
+        case '12':
+          type.textContent = '좌석';
+          type.classList.add('blue');
+          break;
+        case '13':
+        case '15':
+          type.textContent = '일반';
+          break;
+        case '14':
+          type.textContent = '광역';
+          type.classList.add('red');
+          break;
+        case '23':
+          type.textContent = '농어촌';
+          break;
+      }
+      name.appendChild(type);
+      let region = document.createElement('span');
+      region.textContent = route.region;
+      
+      item.appendChild(name);
+      item.appendChild(region);
+
+      ul.appendChild(item);
+    }
+    document.getElementById('result').appendChild(ul);
+  } 
+}
+
+/* select > option 요소 클릭 시 */
+function selectRouteItem(){
+  console.log(this.datalist.name);
+  // sendData('POST', '/', JSON.stringify({routeNo: `${this.value}`}));
+}

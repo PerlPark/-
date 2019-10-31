@@ -16,9 +16,14 @@ let locPosition = new kakao.maps.LatLng(37.275051, 127.0094448); // 초기 좌�
 let geocoder = new kakao.maps.services.Geocoder(); 
 let printAddress = function(result, status) {
   if (status === kakao.maps.services.Status.OK) {
-    let address = '';
-    if(result[0].address) address = result[0].address.address_name;
-    if(result[0].road_address) address = result[0].road_address.address_name + " " + result[0].road_address.building_name;
+    let address = result[0].address.address_name;
+    if(result[0].road_address){
+      result[0].road_address.building_name ? (
+        address = result[0].road_address.building_name
+      ) : (
+        address = result[0].road_address.address_name
+      );
+    }
     document.getElementById('info').textContent = address;
   }
 };

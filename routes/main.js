@@ -1,12 +1,28 @@
 var express = require('express');
 var router = express.Router();
 const controller = require('./controller');
+const master = require('./master');
+const busList = require('../config/buslist.json');
 
-/* 메인 접속 렌더링 */
-router.get('/', controller.main);
-router.post('/', controller.loading);
-router.get('/position', controller.searchPosition);
-router.get('/bus', controller.searchBus);
-router.get('/support/bus', controller.supportBus);
+router.get('/', function(req, res) {
+  res.render('main', { title: '버스야 어디가니?' });
+});
+
+router.get('/position', function(req, res) {
+  res.render('search-position', { title: '버스야 어디가니? > 위치 지정' });
+});
+
+router.get('/bus', function(req, res) {
+  res.render('search-bus', { title: '버스야 어디가니? > 버스 검색' });
+});
+
+router.post('/bus', controller.searchBusResult);
+
+router.get('/support/bus', function(req, res) {
+  res.render('support-bus', { title: '버스야 어디가니? > 지원하는 버스 목록', busList: busList });
+});
+
+router.get('/master', master.main);
+router.get('/master/update/bus', master.updateBus);
 
 module.exports = router;

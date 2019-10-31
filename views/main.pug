@@ -1,7 +1,7 @@
 doctype html
 html
   include includes/head.pug
-  body
+  body.main
   include includes/header.pug
   main
     form#form(action="/search" method="get")
@@ -21,5 +21,4 @@ html
       h2 저장한 버스 도착 정보
       p 저장된 버스 도착 정보가 없습니다. 자주 확인할 도착 정보를 저장하여 빠르게 조회하세요.
     script(src="/javascripts/getCurrentPosition.js")
-    script(src="/javascripts/getBusList.js")
     script(src="/javascripts/main.js")

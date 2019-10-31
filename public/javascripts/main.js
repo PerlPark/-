@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
   getCurrentPosition();
-  // getBusList();
 
   // 즐겨찾기한 도착 정보 있을 경우
   if(bookmarkList){

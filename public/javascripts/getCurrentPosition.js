@@ -45,8 +45,14 @@ let getCurrentPosition = function(){
       var callback = function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
           let address = result[0].address.address_name;
-          let textfield = document.getElementById('position-textfield');
-          textfield.textContent = address;
+          if(result[0].road_address){
+            result[0].road_address.building_name ? (
+              address = result[0].road_address.building_name
+            ) : (
+              address = result[0].road_address.address_name
+            );
+          }
+          document.getElementById('position-textfield').textContent = address;
         }
       };
       geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
