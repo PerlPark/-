@@ -37,10 +37,6 @@ let mapContainer = document.getElementById('map'),
         level: 5 // 지도의 확대 레벨 
     };
 let map = new kakao.maps.Map(mapContainer, mapOption); // 지도 생성
-// 줌 컨트롤 추가
-var zoomControl = new kakao.maps.ZoomControl();
-map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
-
 
 // 초기 좌표 값 마커 생성
 let marker = new kakao.maps.Marker({ position: map.getCenter() });

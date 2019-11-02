@@ -132,17 +132,15 @@ header {
     color: $light_color;
     text-shadow: $dark_color-alpha05 0 3px 10px;
   }
-  #search-position a {
+  a {
     color: $light_color;
     text-decoration: none;
     border-bottom: 3px $light_color solid;
     cursor: pointer;
   }
-  #search-bus a {
+  #search-bus .placeholder {
     color: $light_color-alpha05;
-    text-decoration: none;
     border-bottom: 3px $light_color-alpha05 solid;
-    cursor: pointer;
   }
   button {
     width: 50px;
@@ -199,7 +197,7 @@ header {
       @include flex-parent();
       flex-direction: row;
       max-width: 600px;
-      padding-top: 15px;
+      padding:15px 15px 0 15px;
       margin: 0 auto;
     }
 
@@ -261,7 +259,13 @@ li {
   cursor: pointer;
   border-bottom: 1px $dark_color-alpha05 solid;
   padding: 0.5em;
+  margin: 0 auto;
+  max-width: 600px;
+  list-style: none;
 
+  span {
+    font-size: 0.75em;
+  }
   /* 버스 타입 라벨 */
   .type {
     color: $light_color;

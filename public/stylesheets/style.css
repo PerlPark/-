@@ -114,16 +114,14 @@ header {
     font-weight: bold;
     color: white;
     text-shadow: rgba(0, 0, 0, 0.2) 0 3px 10px; }
-  .main form #search-position a {
+  .main form a {
     color: white;
     text-decoration: none;
     border-bottom: 3px white solid;
     cursor: pointer; }
-  .main form #search-bus a {
+  .main form #search-bus .placeholder {
     color: rgba(255, 255, 255, 0.5);
-    text-decoration: none;
-    border-bottom: 3px rgba(255, 255, 255, 0.5) solid;
-    cursor: pointer; }
+    border-bottom: 3px rgba(255, 255, 255, 0.5) solid; }
   .main form button {
     width: 50px;
     height: 50px;
@@ -186,7 +184,7 @@ header {
       /* NEW, Spec - Opera 12.1, Firefox 20+ */
       flex-direction: row;
       max-width: 600px;
-      padding-top: 15px;
+      padding: 15px 15px 0 15px;
       margin: 0 auto; }
     .search header #btn-back {
       background-color: transparent;
@@ -259,7 +257,12 @@ li {
   cursor: pointer;
   border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
   padding: 0.5em;
+  margin: 0 auto;
+  max-width: 600px;
+  list-style: none;
   /* 버스 타입 라벨 */ }
+  li span {
+    font-size: 0.75em; }
   li .type {
     color: white;
     font-size: 0.1em;
@@ -302,11 +305,9 @@ li {
     right: 20px; } }
 
 @media only screen and (max-width: 600px) {
-  form {
+  .main form {
     margin: 20vh 0 0 15vw;
     text-align: left !important; }
-    form div {
+    .main form div {
       display: block;
-      margin-bottom: 10px; }
-  .search header div {
-    padding: 10px; } }
+      margin-bottom: 10px; } }

@@ -7,21 +7,13 @@
 }
 
 @media only screen and (max-width: 600px) {
-  form {
+  .main form {
     margin: 20vh 0 0 15vw;
     text-align: left !important;
 
     div {
       display: block;
       margin-bottom: 10px;
-    }
-  }
-
-  .search {
-    header {
-      div {
-        padding: 10px;
-      }
     }
   }
 }

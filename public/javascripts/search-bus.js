@@ -1,7 +1,10 @@
+let routeListData;
+
 document.addEventListener("DOMContentLoaded", function(){
-  // 최근 검색 기록 없을 경우
-  if(!searchHistory){
-    document.getElementById('blank').classList.remove('hidden');
+  // 최근 검색 기록 얐을 경우
+  if(localStorage.getItem('searchHistory')){
+    document.getElementById('blank').classList.add('hidden');
+    printRouteList(localStorage.getItem('searchHistory'));
   }
 });
 
@@ -23,8 +26,8 @@ document.getElementById('routeNoInput').onkeyup = function(){
   }
 }
 
-let printRouteList = function(responseText){
-  let routeListData = JSON.parse(responseText);
+let printRouteList = function(list){
+  routeListData = JSON.parse(list);
 
   /* 이미 생성된 select 박스 있으면 제거 */
   let ul = document.getElementsByTagName('ul')[0];
@@ -38,6 +41,7 @@ let printRouteList = function(responseText){
     for(let i = 0; i < routeListData.length; i++){
       let route = routeListData[i];
       let item = document.createElement('li');
+      item.setAttribute('data-no', i);
       item.setAttribute('data-id', route.id);
       item.setAttribute('data-name', route.name);
       item.addEventListener('click', selectRouteItem);
@@ -69,11 +73,11 @@ let printRouteList = function(responseText){
           break;
       }
       name.appendChild(type);
-      let region = document.createElement('span');
-      region.textContent = route.region;
+      let info = document.createElement('span');
+      info.textContent = `${route.region} | ${route.startStationName} ↔ ${route.endStationName} | ${route.upFirstTime} ~ ${route.upLastTime}`;
       
       item.appendChild(name);
-      item.appendChild(region);
+      item.appendChild(info);
 
       ul.appendChild(item);
     }
@@ -83,6 +87,26 @@ let printRouteList = function(responseText){
 
 /* select > option 요소 클릭 시 */
 function selectRouteItem(){
-  console.log(this.dataset.name, this.dataset.id);
-  location.href = `/?no=${this.dataset.name}&id=${this.dataset.id}`;
+  // 선택한 버스 데이터 저장
+  let userData = JSON.parse(localStorage.getItem('userData'));
+  if(!userData){
+    userData = {};
+  }
+  userData.routeId = this.dataset.id;
+  userData.routeName = this.dataset.name;
+  console.log(this.dataset.id, userData.routeId, this.dataset.name, userData.routeName);
+  localStorage.setItem('userData', JSON.stringify(userData));
+  // 검색 히스토리 업뎃
+  let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+  if(!searchHistory){
+    searchHistory = [];
+  } else {
+    if(searchHistory.filter(obj => obj.routeId === this.dataset.id)){
+
+    } else {
+      searchHistory.push(routeListData[this.dataset.no]);
+    }
+  }
+  localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+  location.href = '/';
 }
