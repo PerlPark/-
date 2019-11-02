@@ -5,7 +5,11 @@ const master = require('./master');
 const busList = require('../config/buslist.json');
 
 router.get('/', function(req, res) {
-  res.render('main', { title: '버스야 어디가니?' });
+  if(req.query.no && req.query.id){
+    res.render('main_data', { title: '버스야 어디가니?', routeNo: req.query.no, routeId: req.query.id });
+  } else {
+    res.render('main', { title: '버스야 어디가니?' });
+  }
 });
 
 router.get('/position', function(req, res) {

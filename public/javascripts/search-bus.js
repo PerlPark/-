@@ -25,7 +25,6 @@ document.getElementById('routeNoInput').onkeyup = function(){
 
 let printRouteList = function(responseText){
   let routeListData = JSON.parse(responseText);
-  console.log(routeListData);
 
   /* 이미 생성된 select 박스 있으면 제거 */
   let ul = document.getElementsByTagName('ul')[0];
@@ -84,6 +83,6 @@ let printRouteList = function(responseText){
 
 /* select > option 요소 클릭 시 */
 function selectRouteItem(){
-  console.log(this.datalist.name);
-  // sendData('POST', '/', JSON.stringify({routeNo: `${this.value}`}));
+  console.log(this.dataset.name, this.dataset.id);
+  location.href = `/?no=${this.dataset.name}&id=${this.dataset.id}`;
 }

@@ -5,13 +5,14 @@ html
   include includes/header.pug
   main
     form#form(action="/search" method="get")
-      input(id="latInput" type="hidden" name="lat")
-      input(id="lngInput" type="hidden" name="lng")
+      input(id="latInput" type="hidden" name="lat" value= routeId)
+      input(id="lngInput" type="hidden" name="lng" value= routeId)
+      input(id="routeId" type="hidden" name="routeId" value= routeId)
       div#search-position
         a 현재 위치
         span 에서 
       div#search-bus
-        a 30-2
+        a= routeNo
         span 번 버스
         button(type="submit")
           i(class="material-icons") search
