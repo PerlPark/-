@@ -18,6 +18,7 @@ app.use('/support/bus', router);
 
 app.use('/master', router);
 app.use('/master/update/bus', router);
+app.use('/master/update/bus/detail', router);
 
 var port = process.env.PORT || 3000;
 app.listen(port, function(){
