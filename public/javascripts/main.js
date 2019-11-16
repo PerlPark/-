@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(){
-  getCurrentPosition();
 
   // 즐겨찾기한 도착 정보 있을 경우
   if(bookmarkList){
@@ -12,10 +11,9 @@ document.addEventListener("DOMContentLoaded", function(){
     if(userData.routeId && userData.routeName){
       document.getElementById('routeId').value = userData.routeId;
       document.getElementById('search-bus').children[0].textContent = userData.routeName;
-      document.getElementById('search-bus').classList.remove('placeholder');
+      document.getElementById('search-bus').children[0].classList.remove('placeholder');
     }
   }
-
   let form = document.getElementById('form');
 });
 
